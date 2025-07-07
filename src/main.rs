@@ -2,18 +2,22 @@ use std::io;
 
 fn main() {
     println!("Welcome to my rust calculator");
-    println!("Please enter a command: \n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\nq. Quit");
 
-    let mut command = String::new();
-    let mut n1 = String::new();
-    let mut n2 = String::new();
 
     loop {
+        let mut command = String::new();
+        let mut n1 = String::new();
+        let mut n2 = String::new();
+
+        println!("\nPlease enter a command: \n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\nq. Quit");
+
         io::stdin()
             .read_line(&mut command)
             .expect("Failed to read the line");
 
-        let command = command.trim();
+        let command = command.trim().to_lowercase();
+
+        if command == "q" { println!("\nYou're logged of the rust calculator :)"); break; }
 
         println!("type ur n1:");
         io::stdin()
@@ -22,7 +26,10 @@ fn main() {
 
         let n1: u32 = match n1.trim().parse() {
             Ok(num) => num,
-            Err(_) => continue,
+            Err(e) => {
+                println!("Please enter a positive integer, {}", e);
+                continue;
+            },
         };
 
         println!("type ur n2:");
@@ -32,15 +39,36 @@ fn main() {
 
         let n2: u32 = match n2.trim().parse() {
             Ok(num) => num,
-            Err(_) => continue,
+            Err(e) => {
+                println!("please enter a positive integer, {}", e);
+                continue;
+            },
         };
 
-        match command {
+        match command.as_str() {
             "1" => {
                 let result = n1 + n2;
                 println!("ur result is: {}", result);
             },
-            "Q" => {
+            "2" => {
+                let result = n1 - n2;
+                println!("ur result is: {}", result);
+            },
+            "3" => {
+                let result = n1 * n2;
+                println!("ur result is: {}", result);
+            },
+            "4" => match n2 {
+                0 => {
+                    println!("u can't do division with zero under :)");
+                    continue;
+                },
+                _ => {
+                    let result = n1 / n2;
+                    println!("ur result is: {}", result);
+                }
+            },
+            "q" => {
                 break;
             }
             _ => {
