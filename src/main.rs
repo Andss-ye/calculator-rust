@@ -17,7 +17,7 @@ fn main() {
 
         let command = command.trim().to_lowercase();
 
-        if command == "q" { println!("\nYou're logged of the rust calculator :)"); break; }
+        if command == "q" { println!("\nYou're logged of the rust calculator uwu"); break; }
 
         println!("type ur n1:");
         io::stdin()
