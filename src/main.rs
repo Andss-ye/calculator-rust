@@ -65,7 +65,7 @@ fn main() {
                 },
                 _ => {
                     let result = n1 / n2;
-                    println!("ur result is: {}", result);
+                    println!("your result is: {}", result);
                 }
             },
             "q" => {
